@@ -35,7 +35,7 @@ export function useHotjar(): TUseHotjar {
   const identityHotjar = React.useCallback(
     (userId: string, userInfo: string, shouldLog = true): boolean => {
       try {
-        const hotjarIdentityScript = `var userId="${userId}" || null;window.hj("identify",userId,{${userInfo}}});`;
+        const hotjarIdentityScript = `var userId="${userId}" || null;window.hj("identify",userId,${userInfo});`;
         const isIdentified = appendHeadScript({
           scriptText: hotjarIdentityScript,
           scriptId: 'identity-script',

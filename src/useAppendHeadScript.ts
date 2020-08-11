@@ -10,26 +10,26 @@ type TUseAppendHeadScript = {
 };
 
 export function useAppendHeadScript(): TUseAppendHeadScript {
-  const appendHeadScript = ({
-    scriptText,
-    scriptId,
-  }: TAppendHeadScript): boolean => {
-    try {
-      const existentScript = document.getElementById(
-        scriptId
-      ) as HTMLScriptElement;
-      const script = existentScript || document.createElement('script');
-      script.id = scriptId;
-      script.innerText = scriptText;
-      script.crossOrigin = 'anonymous';
+  const appendHeadScript = React.useCallback(
+    ({ scriptText, scriptId }: TAppendHeadScript): boolean => {
+      try {
+        const existentScript = document.getElementById(
+          scriptId
+        ) as HTMLScriptElement;
+        const script = existentScript || document.createElement('script');
+        script.id = scriptId;
+        script.innerText = scriptText;
+        script.crossOrigin = 'anonymous';
 
-      document.head.appendChild(script);
+        document.head.appendChild(script);
 
-      return true;
-    } catch (error) {
-      return error;
-    }
-  };
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    []
+  );
 
-  return React.useMemo(() => ({ appendHeadScript }), []);
+  return React.useMemo(() => ({ appendHeadScript }), [appendHeadScript]);
 }
