@@ -1,6 +1,6 @@
 # react-use-hotjar
 
-> Add [Hotjar](https://www.hotjar.com/) capabilities as custom hooks to your project
+> Adds [Hotjar](https://www.hotjar.com/) capabilities as custom hooks to your project
 
 [![NPM](https://img.shields.io/npm/v/react-use-hotjar.svg)](https://www.npmjs.com/package/react-use-hotjar)
 
@@ -25,7 +25,7 @@ npm install --save react-use-hotjar
 
 ## Usage
 
-- Initializing Hotjar
+- Initializing Hotjar (use it at your very `index.jsx`)
 
 ```tsx
 import * as React from 'react';
@@ -45,7 +45,7 @@ const HotjarReadyApp = () => {
 };
 ```
 
-- Identifying Users
+- Identifying Users (use it wherever you get access to user's information)
 
 ```tsx
 const MyCustomComponent = () => {
@@ -54,7 +54,7 @@ const MyCustomComponent = () => {
   const handleUserInfo = (userInfo) => {
     const { id, ...restUserInfo } = userInfo;
 
-    identityHotjar(
+    identifyHotjar(
       id,
       JSON.stringify({
         restUserInfo,
@@ -84,14 +84,14 @@ initHotjar: (
 ) => boolean;
 ```
 
-- identityHotjar()
+- identifyHotjar()
 
 1. `userId`: Unique user's identification as string
 2. `userInfo`: Stringfied user info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference))
 3. `logCallback`: Optional callback for logging wether Hotjar identified user or not
 
 ```tsx
-identityHotjar: (userId: string, userInfo: string, logCallback?: () => void) =>
+identifyHotjar: (userId: string, userInfo: string, logCallback?: () => void) =>
   boolean;
 ```
 

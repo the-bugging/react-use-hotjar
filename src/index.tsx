@@ -7,7 +7,7 @@ type TUseHotjar = {
     hotjarVersion: string,
     logCallback?: () => void
   ) => boolean;
-  identityHotjar: (
+  identifyHotjar: (
     userId: string,
     userInfo: string,
     logCallback?: () => void
@@ -30,13 +30,13 @@ export function useHotjar(): TUseHotjar {
     [appendHeadScript]
   );
 
-  const identityHotjar = React.useCallback(
+  const identifyHotjar = React.useCallback(
     (userId: string, userInfo: string, loggerFunction): boolean => {
       try {
-        const hotjarIdentityScript = `var userId="${userId}" || null;window.hj("identify",userId,${userInfo});`;
+        const hotjarIdentifyScript = `var userId="${userId}" || null;window.hj("identify",userId,${userInfo});`;
         const isIdentified = appendHeadScript(
-          hotjarIdentityScript,
-          'identity-script'
+          hotjarIdentifyScript,
+          'identify-script'
         );
 
         if (loggerFunction && typeof loggerFunction === 'function')
@@ -52,8 +52,8 @@ export function useHotjar(): TUseHotjar {
     [appendHeadScript]
   );
 
-  return React.useMemo(() => ({ initHotjar, identityHotjar }), [
+  return React.useMemo(() => ({ initHotjar, identifyHotjar }), [
     initHotjar,
-    identityHotjar,
+    identifyHotjar,
   ]);
 }
