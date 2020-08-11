@@ -1,17 +1,12 @@
 import * as React from 'react';
 
-type TAppendHeadScript = {
-  scriptText: string;
-  scriptId: string;
-};
-
 type TUseAppendHeadScript = {
-  appendHeadScript: ({ scriptText, scriptId }: TAppendHeadScript) => boolean;
+  appendHeadScript: (scriptText: string, scriptId: string) => boolean;
 };
 
-export function useAppendHeadScript(): TUseAppendHeadScript {
+export default function useAppendHeadScript(): TUseAppendHeadScript {
   const appendHeadScript = React.useCallback(
-    ({ scriptText, scriptId }: TAppendHeadScript): boolean => {
+    (scriptText: string, scriptId: string): boolean => {
       try {
         const existentScript = document.getElementById(
           scriptId
