@@ -6,34 +6,29 @@ type TAppendHeadScript = {
 };
 
 type TUseAppendHeadScript = {
-  appendHeadScript: ({
-    scriptText,
-    scriptId,
-  }: TAppendHeadScript) => Promise<boolean>;
+  appendHeadScript: ({ scriptText, scriptId }: TAppendHeadScript) => boolean;
 };
 
 export function useAppendHeadScript(): TUseAppendHeadScript {
   const appendHeadScript = ({
     scriptText,
     scriptId,
-  }: TAppendHeadScript): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      try {
-        const existentScript = document.getElementById(
-          scriptId
-        ) as HTMLScriptElement;
-        const script = existentScript || document.createElement('script');
-        script.id = scriptId;
-        script.innerText = scriptText;
-        script.crossOrigin = 'anonymous';
+  }: TAppendHeadScript): boolean => {
+    try {
+      const existentScript = document.getElementById(
+        scriptId
+      ) as HTMLScriptElement;
+      const script = existentScript || document.createElement('script');
+      script.id = scriptId;
+      script.innerText = scriptText;
+      script.crossOrigin = 'anonymous';
 
-        document.head.appendChild(script);
+      document.head.appendChild(script);
 
-        resolve(true);
-      } catch (error) {
-        reject(error);
-      }
-    });
+      return true;
+    } catch (error) {
+      return error;
+    }
   };
 
   return React.useMemo(() => ({ appendHeadScript }), []);

@@ -15,6 +15,11 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint && npm run test && npm run make-badges && git add 'README.md'"
