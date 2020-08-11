@@ -1,8 +1,19 @@
 # react-use-hotjar
 
-> Add Hotjar capabilities as hooks
+> Add [Hotjar](https://www.hotjar.com/) capabilities as custom hooks to your project
 
 [![NPM](https://img.shields.io/npm/v/react-use-hotjar.svg)](https://www.npmjs.com/package/react-use-hotjar)
+
+---
+
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [Documentation](#documentation)
+- [License](#license)
+
+---
 
 ## Install
 
@@ -10,22 +21,85 @@
 npm install --save react-use-hotjar
 ```
 
+---
+
 ## Usage
 
+- Initializing Hotjar
+
 ```tsx
-import * as React from "react";
+import * as React from 'react';
 
-import { useMyHook } from "react-use-hotjar";
+import { useHotjar } from 'react-use-hotjar';
 
-const Example = () => {
-  const example = useMyHook();
-  return <div>{example}</div>;
+const myCustomLogger = console.info;
+
+const HotjarReadyApp = () => {
+  const { initHotjar } = useHotjar();
+
+  React.useEffect(() => {
+    initHotjar(hotjarId, hotjarVersion, myCustomLogger);
+  });
+
+  return <App />;
 };
 ```
 
+- Identifying Users
+
+```tsx
+const MyCustomComponent = () => {
+  const { initHotjar } = useHotjar();
+
+  const handleUserInfo = (userInfo) => {
+    const { id, ...restUserInfo } = userInfo;
+
+    identityHotjar(
+      id,
+      JSON.stringify({
+        restUserInfo,
+      })
+    );
+  };
+};
+```
+
+---
+
+## Documentation
+
+`useHotjar()` returns:
+
+- initHotjar()
+
+1. `hotjarId`: Your Hotjar application ID ex.: 1933331
+2. `hotjarVersion`: Hotjar's current version ex.: 6
+3. `logCallback`: Optional callback for logging wether Hotjar is ready or not
+
+```tsx
+initHotjar: (
+  hotjarId: string,
+  hotjarVersion: string,
+  logCallback?: () => void
+) => boolean;
+```
+
+- identityHotjar()
+
+1. `userId`: Unique user's identification as string
+2. `userInfo`: Stringfied user info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference))
+3. `logCallback`: Optional callback for logging wether Hotjar identified user or not
+
+```tsx
+identityHotjar: (userId: string, userInfo: string, logCallback?: () => void) =>
+  boolean;
+```
+
+---
+
 ## License
 
-MIT © [Olavo Parno](https://github.com/Olavo Parno)
+react-use-hotjar is [MIT licensed](./LICENSE).
 
 ---
 
