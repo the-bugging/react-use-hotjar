@@ -33,6 +33,7 @@
   "scripts": {
     "test": "CI=true react-scripts test --env=jsdom || true",
     "test:watch": "react-scripts test --env=jsdom",
+    "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
@@ -70,6 +71,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-typescript2": "^0.27.2",
     "standard-version": "^8.0.2",
     "typescript": "^3.9.7"
