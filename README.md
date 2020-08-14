@@ -1,3 +1,5 @@
+<img align="right" alt="traffic" src="https://pv-badge.herokuapp.com/total.svg?repo_id=olavoparno-react-use-hotjar"/>
+
 # react-use-hotjar
 
 > Adds [Hotjar](https://www.hotjar.com/) capabilities as custom hooks to your project
