@@ -22,7 +22,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run test && npm run make-badges && git add 'README.md'"
+      "pre-commit": "npm run lint"
     }
   },
   "lint-staged": {
@@ -31,15 +31,12 @@
     ]
   },
   "scripts": {
-    "test": "CI=true react-scripts test --env=jsdom || true",
-    "test:watch": "react-scripts test --env=jsdom",
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
-    "make-badges": "echo ok",
     "release": "standard-version"
   },
   "peerDependencies": {
@@ -48,7 +45,6 @@
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/runtime": "^7.11.2",
-    "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^26.0.9",
     "@types/react": "^16.9.46",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
