@@ -6,6 +6,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-use-hotjar.svg)](https://www.npmjs.com/package/react-use-hotjar)
 
+[Preview-me](https://codesandbox.io/s/react-use-hotjar-dkcjp)
+
 ---
 
 ## Table of Contents
