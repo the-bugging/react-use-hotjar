@@ -27,12 +27,11 @@ npm install --save react-use-hotjar
 
 ## Usage
 
-- Initializing Hotjar (use it at your very `index.jsx`)
+- Initializing Hotjar (use it at the very top of your application)
 
 ```tsx
 import * as React from 'react';
-
-import { useHotjar } from 'react-use-hotjar';
+import useHotjar from 'react-use-hotjar';
 
 const myCustomLogger = console.info;
 
@@ -40,27 +39,31 @@ const HotjarReadyApp = () => {
   const { initHotjar } = useHotjar();
 
   React.useEffect(() => {
-    initHotjar(hotjarId, hotjarVersion, myCustomLogger);
+    initHotjar(1234567, 6, myCustomLogger);
   });
 
   return <App />;
 };
 ```
 
-- Identifying Users (use it wherever you get access to user's information)
+- Identifying Users (Use it wherever user's information is available. Send __stringified__ preferably so that error handling is at this level.)
 
 ```tsx
+import * as React from 'react';
+import useHotjar from 'react-use-hotjar';
+
+const myCustomLogger = console.log;
+
 const MyCustomComponent = () => {
-  const { initHotjar } = useHotjar();
+  const { identifyHotjar } = useHotjar();
 
   const handleUserInfo = (userInfo) => {
     const { id, ...restUserInfo } = userInfo;
+    const informationStringified = JSON.stringify(restUserInfo);
 
     identifyHotjar(
       id,
-      JSON.stringify({
-        restUserInfo,
-      })
+      informationStringified
     );
   };
 };
@@ -89,12 +92,15 @@ initHotjar: (
 - identifyHotjar()
 
 1. `userId`: Unique user's identification as string
-2. `userInfo`: Stringfied user info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference))
+2. `userInfo`: Stringfied user info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference)) (Please note: __The Identify API is only available to Business plan customers.__)
 3. `logCallback`: Optional callback for logging wether Hotjar identified user or not
 
 ```tsx
-identifyHotjar: (userId: string, userInfo: string, logCallback?: () => void) =>
-  boolean;
+identifyHotjar: (
+  userId: string,
+  userInfo: string,
+  logCallback?: () => void
+) => boolean;
 ```
 
 ---
