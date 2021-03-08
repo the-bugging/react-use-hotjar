@@ -1,0 +1,26 @@
+{
+  "projectName": "react-use-hotjar",
+  "projectOwner": "olavoparno",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 70,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "olavoparno",
+      "name": "Olavo Parno",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7513162?v=4",
+      "profile": "https://olavoparno.github.io",
+      "contributions": [
+        "ideas",
+        "code",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true
+}
