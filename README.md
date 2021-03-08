@@ -42,7 +42,7 @@ const HotjarReadyApp = () => {
 
   React.useEffect(() => {
     initHotjar(1234567, 6, myCustomLogger);
-  });
+  },[]);
 
   return <App />;
 };
