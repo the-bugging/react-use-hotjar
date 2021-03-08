@@ -43,7 +43,7 @@ const HotjarReadyApp = () => {
 
   React.useEffect(() => {
     initHotjar(1234567, 6, myCustomLogger);
-  },[]);
+  }, [initHotjar]);
 
   return <App />;
 };
@@ -74,6 +74,13 @@ const MyCustomComponent = () => {
 ## Documentation
 
 `useHotjar()` returns:
+
+- An object with the following keys:
+
+| key            | description              | arguments                                                                   | example                                                                                                         |
+| -------------- | ------------------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| initHotjar     | Initialize method        | (hotjarId: number, hotjarVersion: number, loggerCallback?: console[method]) | (1933331, 6, console.info)                                                                                      |
+| identifyHotjar | User identify API method | (userId: string, userInfo: json object, loggerCallback?: console[method])   | ('abcde-12345-12345', JSON.stringify({name:"Olli",surname:"Parno",address:"Streets of Tomorrow"}), console.log) |
 
 - initHotjar()
 
