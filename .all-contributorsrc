@@ -19,6 +19,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "gianpietro1",
+      "name": "Gianpietro Lavado",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10046142?v=4",
+      "profile": "https://github.com/gianpietro1",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

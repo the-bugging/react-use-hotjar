@@ -109,10 +109,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<table><tr><td align="center"><a href="https://olavoparno.github.io"><img src="https://avatars1.githubusercontent.com/u/7513162?v=4" width="70px;" alt="Olavo Parno"/><br /><sub><b>Olavo Parno</b></sub></a><br /><a href="#ideas-olavoparno" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/olavoparno/react-use-hotjar/commits?author=olavoparno" title="Code">💻</a> <a href="https://github.com/olavoparno/react-use-hotjar/commits?author=olavoparno" title="Tests">⚠️</a></td></tr></table>
+<table>
+  <tr>
+    <td align="center"><a href="https://olavoparno.github.io"><img src="https://avatars1.githubusercontent.com/u/7513162?v=4?s=70" width="70px;" alt=""/><br /><sub><b>Olavo Parno</b></sub></a><br /><a href="#ideas-olavoparno" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/olavoparno/react-use-hotjar/commits?author=olavoparno" title="Code">💻</a> <a href="https://github.com/olavoparno/react-use-hotjar/commits?author=olavoparno" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/gianpietro1"><img src="https://avatars.githubusercontent.com/u/10046142?v=4?s=70" width="70px;" alt=""/><br /><sub><b>Gianpietro Lavado</b></sub></a><br /><a href="https://github.com/olavoparno/react-use-hotjar/commits?author=gianpietro1" title="Documentation">📖</a></td>
+  </tr>
+</table>
 
-
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
