@@ -17,7 +17,7 @@ type TUseAppendHeadScript = {
   appendHeadScript: (scriptText: string, scriptId: string) => boolean;
 };
 
-function useAppendHeadScript(): TUseAppendHeadScript {
+export function useAppendHeadScript(): TUseAppendHeadScript {
   const appendHeadScript = React.useCallback(
     (scriptText: string, scriptId: string): boolean => {
       try {
@@ -42,7 +42,7 @@ function useAppendHeadScript(): TUseAppendHeadScript {
   return React.useMemo(() => ({ appendHeadScript }), [appendHeadScript]);
 }
 
-export function useHotjar(): TUseHotjar {
+export default function useHotjar(): TUseHotjar {
   const { appendHeadScript } = useAppendHeadScript();
 
   const initHotjar = React.useCallback(
@@ -98,5 +98,3 @@ export function useHotjar(): TUseHotjar {
     identifyHotjar,
   ]);
 }
-
-export default useHotjar;
