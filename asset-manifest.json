@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/react-use-hotjar/static/js/main.ea1c3906.chunk.js",
+    "main.js.map": "/react-use-hotjar/static/js/main.ea1c3906.chunk.js.map",
+    "runtime-main.js": "/react-use-hotjar/static/js/runtime-main.b1b3e330.js",
+    "runtime-main.js.map": "/react-use-hotjar/static/js/runtime-main.b1b3e330.js.map",
+    "static/js/2.9d3ff14f.chunk.js": "/react-use-hotjar/static/js/2.9d3ff14f.chunk.js",
+    "static/js/2.9d3ff14f.chunk.js.map": "/react-use-hotjar/static/js/2.9d3ff14f.chunk.js.map",
+    "index.html": "/react-use-hotjar/index.html",
+    "precache-manifest.e877526369b71c90d77999e41170b79b.js": "/react-use-hotjar/precache-manifest.e877526369b71c90d77999e41170b79b.js",
+    "service-worker.js": "/react-use-hotjar/service-worker.js",
+    "static/js/2.9d3ff14f.chunk.js.LICENSE.txt": "/react-use-hotjar/static/js/2.9d3ff14f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1b3e330.js",
+    "static/js/2.9d3ff14f.chunk.js",
+    "static/js/main.ea1c3906.chunk.js"
+  ]
+}
