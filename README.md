@@ -6,8 +6,6 @@
 
 [![NPM](https://img.shields.io/npm/v/react-use-hotjar.svg)](https://www.npmjs.com/package/react-use-hotjar)
 
-[Preview-me](https://codesandbox.io/s/react-use-hotjar-dkcjp)
-
 ---
 
 | Statements                                                                    | Branches                                                                  | Functions                                                                  | Lines                                                                    |
@@ -18,6 +16,7 @@
 
 - [Install](#install)
 - [Usage](#usage)
+- [Examples](#examples)
 - [Documentation](#documentation)
 - [Contributors](#contributors)
 - [License](#license)
@@ -72,6 +71,13 @@ const MyCustomComponent = () => {
   };
 };
 ```
+
+---
+
+## Examples
+
+- You may find a running [example](./example) in this project which are served at [Github Pages](https://olavoparno.github.io/react-use-hotjar).
+- Also, a running codesandbox [codesandbox](https://codesandbox.io/s/react-use-hotjar-dkcjp)
 
 ---
 
