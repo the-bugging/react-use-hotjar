@@ -52,7 +52,7 @@ const HotjarReadyApp = () => {
 };
 ```
 
-- Identifying Users (Use it wherever user's information is available. Send **stringified** preferably so that error handling is at this level.)
+- Identifying Users (Use it wherever user's information is available. Send and object respecting [Identify API's rules](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference#user-attribute-values))
 
 ```tsx
 import * as React from 'react';
@@ -65,9 +65,8 @@ const MyCustomComponent = () => {
 
   const handleUserInfo = (userInfo) => {
     const { id, ...restUserInfo } = userInfo;
-    const informationStringified = JSON.stringify(restUserInfo);
 
-    identifyHotjar(id, informationStringified);
+    identifyHotjar(id, restUserInfo, myCustomLogger);
   };
 };
 ```
@@ -87,10 +86,12 @@ const MyCustomComponent = () => {
 
 - An object with the following keys:
 
-| key            | description              | arguments                                                                   | example                                                                                                         |
-| -------------- | ------------------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| initHotjar     | Initialize method        | (hotjarId: number, hotjarVersion: number, loggerCallback?: console[method]) | (1933331, 6, console.info)                                                                                      |
-| identifyHotjar | User identify API method | (userId: string, userInfo: json object, loggerCallback?: console[method])   | ('abcde-12345-12345', JSON.stringify({name:"Olli",surname:"Parno",address:"Streets of Tomorrow"}), console.log) |
+| key            | description                | arguments                                                                   | example                                                                                         |
+| -------------- | -------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| readyState     | States if Hotjar is ready  | N/A                                                                         | N/A                                                                                             |
+| initHotjar     | Initialize method          | (hotjarId: number, hotjarVersion: number, loggerCallback?: console[method]) | (1933331, 6, console.info)                                                                      |
+| identifyHotjar | User identify API method   | (userId: string, userInfo: object, loggerCallback?: console[method])        | ('abcde-12345-12345', {name:"Olli",surname:"Parno",address:"Streets of Tomorrow"}, console.log) |
+| stateChange    | Relative path state change | (relativePath: string, loggerCallback?: console[method])                    | ('route/logged-route/user?registered=true')                                                     |
 
 - initHotjar()
 
@@ -109,12 +110,21 @@ initHotjar: (
 - identifyHotjar()
 
 1. `userId`: Unique user's identification as string
-2. `userInfo`: Stringfied user info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference)) (Please note: **The Identify API is only available to Business plan customers.**)
+2. `userInfo`: User info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference)) (Please note: **The Identify API is only available to Business plan customers.**)
 3. `logCallback`: Optional callback for logging wether Hotjar identified user or not
 
 ```tsx
-identifyHotjar: (userId: string, userInfo: string, logCallback?: () => void) =>
+identifyHotjar: (userId: string, userInfo: object, logCallback?: () => void) =>
   boolean;
+```
+
+- stateChange()
+
+1. `relativePath`: A change in a route specially for SPAs usage. [stateChange docs](https://help.hotjar.com/hc/en-us/articles/360034378534)
+2. `logCallback`: Optional callback for logging wether Hotjar stateChange was called or not
+
+```tsx
+stateChange: (relativePath: string, logCallback?: () => void) => boolean;
 ```
 
 ---
