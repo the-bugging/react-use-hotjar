@@ -1,7 +1,21 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useHotjar, { useAppendHeadScript } from '..';
+import useHotjar from '..';
+
+interface IWindowHotjarEmbedded extends Window {
+  hj?: (method: string, ...data: unknown[]) => void;
+}
+
+declare const window: IWindowHotjarEmbedded;
+
+const fakeHotjarFunction = jest.fn((method: string, ...data: unknown[]) => {
+  return null;
+});
 
 describe('Tests useHotjar', () => {
+  beforeAll(() => {
+    window.hj = fakeHotjarFunction;
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -56,31 +70,35 @@ describe('Tests useHotjar', () => {
     });
   });
 
-  it('should identifyHotjar with pure object stringified', () => {
+  it('should stateChange with new relative path', () => {
     const { result } = renderHook(() => useHotjar());
-    const identifyHotjarSpy = jest.spyOn(result.current, 'identifyHotjar');
-    const { identifyHotjar } = result.current;
+    const stateChangeSpy = jest.spyOn(result.current, 'stateChange');
+    const { stateChange } = result.current;
 
-    identifyHotjar(
-      '123-123-abc',
-      JSON.stringify({
-        name: 'olli',
-        surname: 'parno',
-        address: 'streets of tomorrow',
-      })
-    );
+    stateChange('new/relative/path');
 
-    expect(identifyHotjarSpy).toHaveBeenCalledWith(
-      '123-123-abc',
-      JSON.stringify({
-        name: 'olli',
-        surname: 'parno',
-        address: 'streets of tomorrow',
-      })
+    expect(stateChangeSpy).toHaveBeenCalledWith('new/relative/path');
+  });
+
+  it('should stateChange with new relative path with logCallback', () => {
+    const { result } = renderHook(() => useHotjar());
+    const stateChangeSpy = jest.spyOn(result.current, 'stateChange');
+    const consoleInfoSpy = jest.spyOn(console, 'info');
+    const { stateChange } = result.current;
+
+    const logCallback = console.info;
+
+    stateChange('new/relative/path', logCallback);
+
+    expect(stateChangeSpy).toHaveBeenCalledWith(
+      'new/relative/path',
+      logCallback
     );
+    expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar stateChanged');
   });
 
   it('should identifyHotjar with broken logCallback', () => {
+    console.error = jest.fn();
     const { result } = renderHook(() => useHotjar());
     const identifyHotjarSpy = jest.spyOn(result.current, 'identifyHotjar');
     const consoleErrorSpy = jest.spyOn(console, 'error');
@@ -126,18 +144,56 @@ describe('Tests useHotjar', () => {
       { name: 'olli', surname: 'parno', address: 'streets of tomorrow' },
       logCallback
     );
-    expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar identified: true');
+    expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar identified');
+  });
+});
+
+describe('Tests Hotjar without being loaded into window', () => {
+  beforeAll(() => {
+    window.hj = undefined;
+    console.error = jest.fn();
   });
 
-  it('should useAppendHeadScript with wrong script', () => {
-    const { result } = renderHook(() => useAppendHeadScript());
-    const appendHeadScriptSpy = jest.spyOn(result.current, 'appendHeadScript');
+  it('should not init hotjar and throw errors', () => {
+    const { result } = renderHook(() => useHotjar());
+    const { initHotjar } = result.current;
+    const consoleErrorSpy = jest.spyOn(console, 'error');
 
-    const { appendHeadScript } = result.current;
+    initHotjar(123, 6);
 
-    const hasItBeenAppended = appendHeadScript('my-script', '123');
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Hotjar error:',
+      Error('Hotjar initialization failed!')
+    );
+  });
 
-    expect(appendHeadScriptSpy).toHaveBeenCalledWith('my-script', '123');
-    expect(hasItBeenAppended).toBeFalsy();
+  it('should identifyHotjar with pure object and throw errors', () => {
+    const { result } = renderHook(() => useHotjar());
+    const { identifyHotjar } = result.current;
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+
+    identifyHotjar('123-123-abc', {
+      name: 'olli',
+      surname: 'parno',
+      address: 'streets of tomorrow',
+    });
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Hotjar error:',
+      Error('Hotjar is not available! Is Hotjar initialized?')
+    );
+  });
+
+  it('should stateChange with new relative path and throw errros', () => {
+    const { result } = renderHook(() => useHotjar());
+    const { stateChange } = result.current;
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+
+    stateChange('new/relative/path');
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Hotjar error:',
+      Error('Hotjar is not available! Is Hotjar initialized?')
+    );
   });
 });

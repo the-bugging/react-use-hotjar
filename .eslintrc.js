@@ -30,7 +30,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.tsx'] }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'react/prop-types': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'import/extensions': ['error', 'never'],
@@ -46,5 +46,6 @@ module.exports = {
     ],
     'react/state-in-constructor': 'off',
     'no-console': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
 };
