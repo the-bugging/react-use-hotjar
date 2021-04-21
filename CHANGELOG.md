@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/olavoparno/react-use-hotjar/compare/v1.0.13...v1.1.0) (2021-04-21)
+
+
+### Features
+
+* add stateChange functionality ([0612234](https://github.com/olavoparno/react-use-hotjar/commit/0612234774e1073e439363c0fd6f71308b5dd15a))
+
 ### [1.0.13](https://github.com/olavoparno/react-use-hotjar/compare/v1.0.12...v1.0.13) (2021-03-09)
 
 ### [1.0.12](https://github.com/olavoparno/react-use-hotjar/compare/v1.0.11...v1.0.12) (2021-03-08)
