@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/olavoparno/react-use-hotjar/compare/v1.1.0...v1.1.1) (2021-04-27)
+
+
+### Bug Fixes
+
+* check for window's existance ([8976a27](https://github.com/olavoparno/react-use-hotjar/commit/8976a27b7d027bed7ed7b5c4a1ffccd4781ffefd))
+
 ## [1.1.0](https://github.com/olavoparno/react-use-hotjar/compare/v1.0.13...v1.1.0) (2021-04-21)
 
 
