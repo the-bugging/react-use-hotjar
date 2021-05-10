@@ -46,9 +46,9 @@ describe('Tests useHotjar', () => {
 
     const logCallback = console.info;
 
-    initHotjar(123, 6, logCallback);
+    initHotjar(123, 6, false, logCallback);
 
-    expect(initHotjarSpy).toHaveBeenCalledWith(123, 6, logCallback);
+    expect(initHotjarSpy).toHaveBeenCalledWith(123, 6, false, logCallback);
     expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar ready: true');
   });
 

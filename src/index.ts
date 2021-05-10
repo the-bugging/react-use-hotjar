@@ -18,10 +18,11 @@ export default function useHotjar(): IUseHotjar {
     (
       hotjarId: number,
       hotjarVersion: number,
+      hotjarDebug?: boolean,
       logCallback?: (...data: unknown[]) => void
     ): boolean => {
       try {
-        hotjarInitScript(hotjarId, hotjarVersion);
+        hotjarInitScript(hotjarId, hotjarVersion, !!hotjarDebug);
 
         setReadyState(true);
 

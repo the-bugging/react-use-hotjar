@@ -14,6 +14,7 @@ export interface IUseHotjar {
   initHotjar: (
     hotjarId: number,
     hotjarVersion: number,
+    hotjarDebug?: boolean,
     logCallback?: (...data: unknown[]) => void
   ) => boolean;
   identifyHotjar: (
@@ -50,13 +51,14 @@ export const appendHeadScript = (
 
 export function hotjarInitScript(
   hotjarId: number,
-  hotjarVersion: number
+  hotjarVersion: number,
+  hotjardebug: boolean
 ): boolean {
   const hasWindow = typeof window !== 'undefined';
 
   if (!hasWindow) return false;
 
-  const hotjarScriptCode = `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${hotjarId},hjsv:${hotjarVersion}};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
+  const hotjarScriptCode = `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${hotjarId},hjsv:${hotjarVersion},hjdebug:${hotjardebug}};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
   const isAppended = appendHeadScript(hotjarScriptCode, 'hotjar-init-script');
 
   if (isAppended && hasWindow && window.hj) {
