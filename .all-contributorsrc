@@ -38,6 +38,16 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "ajayvarghese",
+      "name": "Ajay Varghese",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12490903?v=4",
+      "profile": "https://ajayvarghese.netlify.app/",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
