@@ -45,7 +45,7 @@ const HotjarReadyApp = () => {
   const { initHotjar } = useHotjar();
 
   React.useEffect(() => {
-    initHotjar(1234567, 6, myCustomLogger);
+    initHotjar(1234567, 6, false, myCustomLogger);
   }, [initHotjar]);
 
   return <App />;
@@ -89,7 +89,7 @@ const MyCustomComponent = () => {
 | key            | description                | arguments                                                                   | example                                                                                         |
 | -------------- | -------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | readyState     | States if Hotjar is ready  | N/A                                                                         | N/A                                                                                             |
-| initHotjar     | Initialize method          | (hotjarId: number, hotjarVersion: number, loggerCallback?: console[method]) | (1933331, 6, console.info)                                                                      |
+| initHotjar     | Initialize method          | (hotjarId: number, hotjarVersion: number, hotjarDebug?: boolean, loggerCallback?: console[method]) | (1933331, 6, false, console.info)                                                                      |
 | identifyHotjar | User identify API method   | (userId: string, userInfo: object, loggerCallback?: console[method])        | ('abcde-12345-12345', {name:"Olli",surname:"Parno",address:"Streets of Tomorrow"}, console.log) |
 | stateChange    | Relative path state change | (relativePath: string, loggerCallback?: console[method])                    | ('route/logged-route/user?registered=true')                                                     |
 
@@ -97,12 +97,14 @@ const MyCustomComponent = () => {
 
 1. `hotjarId`: Your Hotjar application ID ex.: 1933331
 2. `hotjarVersion`: Hotjar's current version ex.: 6
-3. `logCallback`: Optional callback for logging wether Hotjar is ready or not
+3. `hotjarDebug`: Optional Debug Mode to see hotjar logs in console ex.: true
+4. `logCallback`: Optional callback for logging wether Hotjar is ready or not
 
 ```tsx
 initHotjar: (
   hotjarId: string,
   hotjarVersion: string,
+  hotjarDebug?: boolean,
   logCallback?: () => void
 ) => boolean;
 ```
