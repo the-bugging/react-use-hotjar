@@ -4,9 +4,8 @@ import {
   hotjarIdentifyScript,
   hotjarInitScript,
   hotjarStateChangeScript,
-  IUseHotjar,
-  TUserInfo,
 } from './dependencies';
+import { IUseHotjar, TUserInfo } from './types';
 
 export default function useHotjar(): IUseHotjar {
   const isReadyState = checkReadyState();
@@ -31,7 +30,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error('Hotjar error:', error);
+        console.error(`Hotjar error: ${error.message}`);
 
         return false;
       }
@@ -53,7 +52,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error('Hotjar error:', error);
+        console.error(`Hotjar error: ${error.message}`);
 
         return false;
       }
@@ -71,7 +70,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error('Hotjar error:', error);
+        console.error(`Hotjar error: ${error.message}`);
 
         return false;
       }

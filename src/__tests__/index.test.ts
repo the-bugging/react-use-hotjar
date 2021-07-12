@@ -1,31 +1,28 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { IWindowHotjarEmbedded } from '../types';
 import useHotjar from '..';
 
-interface IWindowHotjarEmbedded extends Window {
-  hj?: (method: string, ...data: unknown[]) => void;
-}
-
-declare const window: IWindowHotjarEmbedded;
-
-const fakeHotjarFunction = jest.fn((method: string, ...data: unknown[]) => {
+const fakeHotjarFunction = jest.fn(() => {
   return null;
 });
 
 describe('Tests useHotjar', () => {
   beforeAll(() => {
-    window.hj = fakeHotjarFunction;
+    (window as unknown as IWindowHotjarEmbedded).hj = fakeHotjarFunction;
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should return both methods', () => {
+  it('should return all methods', () => {
     const { result } = renderHook(() => useHotjar());
 
     expect(result.current).toBeTruthy();
     expect(result.current.initHotjar).toBeTruthy();
     expect(result.current.identifyHotjar).toBeTruthy();
+    expect(result.current.readyState).toBeTruthy();
+    expect(result.current.stateChange).toBeTruthy();
   });
 
   it('should initHotjar', () => {
@@ -120,8 +117,7 @@ describe('Tests useHotjar', () => {
       brokenLogCallback
     );
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Hotjar error:',
-      Error('test')
+      `Hotjar error: ${Error('test').message}`
     );
   });
 
@@ -150,7 +146,7 @@ describe('Tests useHotjar', () => {
 
 describe('Tests Hotjar without being loaded into window', () => {
   beforeAll(() => {
-    window.hj = undefined;
+    (window as unknown as IWindowHotjarEmbedded).hj = undefined;
     console.error = jest.fn();
   });
 
@@ -162,8 +158,7 @@ describe('Tests Hotjar without being loaded into window', () => {
     initHotjar(123, 6);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Hotjar error:',
-      Error('Hotjar initialization failed!')
+      `Hotjar error: ${Error('Hotjar initialization failed!').message}`
     );
   });
 
@@ -179,8 +174,9 @@ describe('Tests Hotjar without being loaded into window', () => {
     });
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Hotjar error:',
-      Error('Hotjar is not available! Is Hotjar initialized?')
+      `Hotjar error: ${
+        Error('Hotjar is not available! Is Hotjar initialized?').message
+      }`
     );
   });
 
@@ -192,8 +188,35 @@ describe('Tests Hotjar without being loaded into window', () => {
     stateChange('new/relative/path');
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Hotjar error:',
-      Error('Hotjar is not available! Is Hotjar initialized?')
+      `Hotjar error: ${
+        Error('Hotjar is not available! Is Hotjar initialized?').message
+      }`
+    );
+  });
+});
+
+describe('Tests useHotjar init and its rejections', () => {
+  beforeAll(() => {
+    global.document.getElementById = () => {
+      throw Error('Error');
+    };
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should fail on initializing hotjar', () => {
+    const consoleSpy = jest.spyOn(console, 'error');
+
+    const { result } = renderHook(() => useHotjar());
+    const { initHotjar } = result.current;
+
+    const failedInitResult = initHotjar(123, 6);
+
+    expect(failedInitResult).toBeFalsy();
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Hotjar error: Hotjar initialization failed!'
     );
   });
 });

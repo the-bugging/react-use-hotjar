@@ -1,32 +1,4 @@
-interface IWindowHotjarEmbedded extends Window {
-  hj?: (method: string, ...data: unknown[]) => void;
-}
-
-declare const window: IWindowHotjarEmbedded;
-
-export type TUserInfo = Record<
-  string | number,
-  string | number | Date | boolean
->;
-
-export interface IUseHotjar {
-  readyState: boolean;
-  initHotjar: (
-    hotjarId: number,
-    hotjarVersion: number,
-    hotjarDebug?: boolean,
-    logCallback?: (...data: unknown[]) => void
-  ) => boolean;
-  identifyHotjar: (
-    userId: string,
-    userInfo: TUserInfo,
-    logCallback?: (...data: unknown[]) => void
-  ) => boolean;
-  stateChange: (
-    relativePath: string,
-    logCallback?: ((...data: unknown[]) => void) | undefined
-  ) => boolean;
-}
+import { IWindowHotjarEmbedded, TUserInfo } from './types';
 
 export const appendHeadScript = (
   scriptText: string,
@@ -56,12 +28,16 @@ export function hotjarInitScript(
 ): boolean {
   const hasWindow = typeof window !== 'undefined';
 
-  if (!hasWindow) return false;
+  if (!hasWindow) throw Error('Hotjar depends on window. Window is undefined.');
 
   const hotjarScriptCode = `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:${hotjarId},hjsv:${hotjarVersion},hjdebug:${hotjardebug}};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`;
   const isAppended = appendHeadScript(hotjarScriptCode, 'hotjar-init-script');
 
-  if (isAppended && hasWindow && window.hj) {
+  if (
+    isAppended &&
+    hasWindow &&
+    (window as unknown as IWindowHotjarEmbedded).hj
+  ) {
     return true;
   }
 
@@ -70,8 +46,11 @@ export function hotjarInitScript(
 
 export function hotjarStateChangeScript(relativePath: string): void {
   const hasWindow = typeof window !== 'undefined';
-  if (hasWindow && window.hj) {
-    return window.hj('stateChange', relativePath);
+  if (hasWindow && (window as unknown as IWindowHotjarEmbedded).hj) {
+    return (window as unknown as IWindowHotjarEmbedded).hj(
+      'stateChange',
+      relativePath
+    );
   }
 
   throw Error('Hotjar is not available! Is Hotjar initialized?');
@@ -82,8 +61,12 @@ export function hotjarIdentifyScript(
   userInfo: TUserInfo
 ): void {
   const hasWindow = typeof window !== 'undefined';
-  if (hasWindow && window.hj) {
-    return window.hj('identify', userId, userInfo);
+  if (hasWindow && (window as unknown as IWindowHotjarEmbedded).hj) {
+    return (window as unknown as IWindowHotjarEmbedded).hj(
+      'identify',
+      userId,
+      userInfo
+    );
   }
 
   throw Error('Hotjar is not available! Is Hotjar initialized?');
@@ -91,7 +74,7 @@ export function hotjarIdentifyScript(
 
 export function checkReadyState(): boolean {
   const hasWindow = typeof window !== 'undefined';
-  if (hasWindow && window.hj) {
+  if (hasWindow && (window as unknown as IWindowHotjarEmbedded).hj) {
     return true;
   }
 
