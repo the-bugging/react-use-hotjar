@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -84,7 +84,7 @@ export default function App() {
   const [isHotjarReady, setHotjarReady] = useState(false);
 
   useEffect(() => {
-    const isReady = initHotjar(2262285, 6, myCustomLogger);
+    const isReady = initHotjar(2262285, 6, false, myCustomLogger);
 
     setHotjarReady(isReady);
   }, [initHotjar]);
@@ -112,7 +112,7 @@ export default function App() {
             target="_blank"
             href="https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference"
           >
-            Hotjar's Identify API.
+            Hotjar&apos;s Identify API.
           </Link>
         </Typography>
       </CardContent>
