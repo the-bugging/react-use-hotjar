@@ -92,13 +92,14 @@ const MyCustomComponent = () => {
 | initHotjar     | Initialize method          | (hotjarId: number, hotjarVersion: number, hotjarDebug?: boolean, loggerCallback?: console[method]) | (1933331, 6, false, console.info)                                                                      |
 | identifyHotjar | User identify API method   | (userId: string, userInfo: object, loggerCallback?: console[method])        | ('abcde-12345-12345', {name:"Olli",surname:"Parno",address:"Streets of Tomorrow"}, console.log) |
 | stateChange    | Relative path state change | (relativePath: string, loggerCallback?: console[method])                    | ('route/logged-route/user?registered=true')                                                     |
+| tagRecording   | Tag a recording            | (tags: string[], loggerCallback?: console[method])                          | (['tag1', 'tag2'])                                                                              |
 
 - initHotjar()
 
 1. `hotjarId`: Your Hotjar application ID ex.: 1933331
 2. `hotjarVersion`: Hotjar's current version ex.: 6
 3. `hotjarDebug`: Optional Debug Mode to see hotjar logs in console ex.: true
-4. `logCallback`: Optional callback for logging wether Hotjar is ready or not
+4. `logCallback`: Optional callback for logging whether Hotjar is ready or not
 
 ```tsx
 initHotjar: (
@@ -113,7 +114,7 @@ initHotjar: (
 
 1. `userId`: Unique user's identification as string
 2. `userInfo`: User info of key-value pairs (note this must not be so long and deep according to [docs](https://help.hotjar.com/hc/en-us/articles/360033640653-Identify-API-Reference)) (Please note: **The Identify API is only available to Business plan customers.**)
-3. `logCallback`: Optional callback for logging wether Hotjar identified user or not
+3. `logCallback`: Optional callback for logging whether Hotjar identified user or not
 
 ```tsx
 identifyHotjar: (userId: string, userInfo: object, logCallback?: () => void) =>
@@ -123,10 +124,19 @@ identifyHotjar: (userId: string, userInfo: object, logCallback?: () => void) =>
 - stateChange()
 
 1. `relativePath`: A change in a route specially for SPAs usage. [stateChange docs](https://help.hotjar.com/hc/en-us/articles/360034378534)
-2. `logCallback`: Optional callback for logging wether Hotjar stateChange was called or not
+2. `logCallback`: Optional callback for logging whether Hotjar stateChange was called or not
 
 ```tsx
 stateChange: (relativePath: string, logCallback?: () => void) => boolean;
+```
+
+- tagRecording()
+
+1. `tags`: List of strings to associate with a recording that can be used for filtering
+2. `logCallback`: Optional callback for logging whether Hotjar tagRecording was called or not
+
+```tsx
+tagRecording: (tags: string[], logCallback?: () => void) => boolean;
 ```
 
 ---

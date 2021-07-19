@@ -4,6 +4,7 @@ import {
   hotjarIdentifyScript,
   hotjarInitScript,
   hotjarStateChangeScript,
+  hotjarTagRecordingScript,
 } from './dependencies';
 import { IUseHotjar, TUserInfo } from './types';
 
@@ -78,8 +79,32 @@ export default function useHotjar(): IUseHotjar {
     []
   );
 
+  const tagRecording = React.useCallback(
+    (tags: string[], logCallback?: (...data: unknown[]) => void) => {
+      try {
+        hotjarTagRecordingScript(tags);
+
+        if (logCallback && typeof logCallback === 'function')
+          logCallback(`Hotjar tagRecording`);
+
+        return true;
+      } catch (error) {
+        console.error(`Hotjar error: ${error.message}`);
+
+        return false;
+      }
+    },
+    []
+  );
+
   return React.useMemo(
-    () => ({ readyState, stateChange, initHotjar, identifyHotjar }),
-    [readyState, stateChange, initHotjar, identifyHotjar]
+    () => ({
+      readyState,
+      stateChange,
+      tagRecording,
+      initHotjar,
+      identifyHotjar,
+    }),
+    [readyState, stateChange, tagRecording, initHotjar, identifyHotjar]
   );
 }

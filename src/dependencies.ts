@@ -72,6 +72,18 @@ export function hotjarIdentifyScript(
   throw Error('Hotjar is not available! Is Hotjar initialized?');
 }
 
+export function hotjarTagRecordingScript(tags: string[]): void {
+  const hasWindow = typeof window !== 'undefined';
+  if (hasWindow && (window as unknown as IWindowHotjarEmbedded).hj) {
+    return (window as unknown as IWindowHotjarEmbedded).hj(
+      'tagRecording',
+      tags
+    );
+  }
+
+  throw Error('Hotjar is not available! Is Hotjar initialized?');
+}
+
 export function checkReadyState(): boolean {
   const hasWindow = typeof window !== 'undefined';
   if (hasWindow && (window as unknown as IWindowHotjarEmbedded).hj) {
