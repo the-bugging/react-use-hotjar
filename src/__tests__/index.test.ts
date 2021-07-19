@@ -23,6 +23,7 @@ describe('Tests useHotjar', () => {
     expect(result.current.identifyHotjar).toBeTruthy();
     expect(result.current.readyState).toBeTruthy();
     expect(result.current.stateChange).toBeTruthy();
+    expect(result.current.tagRecording).toBeTruthy();
   });
 
   it('should initHotjar', () => {
@@ -92,6 +93,30 @@ describe('Tests useHotjar', () => {
       logCallback
     );
     expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar stateChanged');
+  });
+
+  it('should tagRecording with list of tags', () => {
+    const { result } = renderHook(() => useHotjar());
+    const tagRecordingSpy = jest.spyOn(result.current, 'tagRecording');
+    const { tagRecording } = result.current;
+
+    tagRecording(['tag1', 'tag2']);
+
+    expect(tagRecordingSpy).toHaveBeenCalledWith(['tag1', 'tag2']);
+  });
+
+  it('should tagRecording with list of tags and ogCallback', () => {
+    const { result } = renderHook(() => useHotjar());
+    const tagRecordingSpy = jest.spyOn(result.current, 'tagRecording');
+    const consoleInfoSpy = jest.spyOn(console, 'info');
+    const { tagRecording } = result.current;
+
+    const logCallback = console.info;
+
+    tagRecording(['tag1', 'tag2'], logCallback);
+
+    expect(tagRecordingSpy).toHaveBeenCalledWith(['tag1', 'tag2'], logCallback);
+    expect(consoleInfoSpy).toHaveBeenCalledWith('Hotjar tagRecording');
   });
 
   it('should identifyHotjar with broken logCallback', () => {
@@ -180,12 +205,26 @@ describe('Tests Hotjar without being loaded into window', () => {
     );
   });
 
-  it('should stateChange with new relative path and throw errros', () => {
+  it('should stateChange with new relative path and throw errors', () => {
     const { result } = renderHook(() => useHotjar());
     const { stateChange } = result.current;
     const consoleErrorSpy = jest.spyOn(console, 'error');
 
     stateChange('new/relative/path');
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      `Hotjar error: ${
+        Error('Hotjar is not available! Is Hotjar initialized?').message
+      }`
+    );
+  });
+
+  it('should tagRecording with new relative path and throw errors', () => {
+    const { result } = renderHook(() => useHotjar());
+    const { tagRecording } = result.current;
+    const consoleErrorSpy = jest.spyOn(console, 'error');
+
+    tagRecording(['tag1', 'tag2']);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       `Hotjar error: ${

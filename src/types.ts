@@ -20,6 +20,10 @@ export interface IUseHotjar {
     relativePath: string,
     logCallback?: ((...data: unknown[]) => void) | undefined
   ) => boolean;
+  tagRecording: (
+    tags: string[],
+    logCallback?: (...data: unknown[]) => void
+  ) => boolean;
 }
 
 export interface IWindowHotjarEmbedded extends Window {
