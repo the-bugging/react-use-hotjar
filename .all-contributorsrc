@@ -60,6 +60,16 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "georgibakken",
+      "name": "Georg Bakken Idland",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16558100?v=4",
+      "profile": "https://github.com/georgibakken",
+      "contributions": [
+        "doc",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
