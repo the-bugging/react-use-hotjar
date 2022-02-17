@@ -70,6 +70,15 @@
         "doc",
         "ideas"
       ]
+    },
+    {
+      "login": "vith",
+      "name": "Jason Papakostas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3265539?v=4",
+      "profile": "https://github.com/vith",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
