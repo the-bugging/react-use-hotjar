@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/olavoparno/react-use-hotjar/compare/v1.2.0...v1.2.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **project:** remove sourcemap as a paliative ([75da78b](https://github.com/olavoparno/react-use-hotjar/commit/75da78b4fb50a415c90d878117df8d2c1d27feda))
+* upgrade @material-ui/core from 4.12.1 to 4.12.3 ([6760c3c](https://github.com/olavoparno/react-use-hotjar/commit/6760c3c387e0f12718bfcdc7ef32b93850fedea8))
+
 ## [1.2.0](https://github.com/olavoparno/react-use-hotjar/compare/v1.1.2...v1.2.0) (2021-07-20)
 
 
