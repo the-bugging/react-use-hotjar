@@ -31,7 +31,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error(`Hotjar error: ${error.message}`);
+        console.error(`Hotjar error: ${(error as Error).message}`);
 
         return false;
       }
@@ -53,7 +53,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error(`Hotjar error: ${error.message}`);
+        console.error(`Hotjar error: ${(error as Error).message}`);
 
         return false;
       }
@@ -71,7 +71,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error(`Hotjar error: ${error.message}`);
+        console.error(`Hotjar error: ${(error as Error).message}`);
 
         return false;
       }
@@ -89,7 +89,7 @@ export default function useHotjar(): IUseHotjar {
 
         return true;
       } catch (error) {
-        console.error(`Hotjar error: ${error.message}`);
+        console.error(`Hotjar error: ${(error as Error).message}`);
 
         return false;
       }
