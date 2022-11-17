@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/olavoparno/react-use-hotjar/compare/v1.2.1...v1.2.2) (2022-11-17)
+
+
+### Bug Fixes
+
+* upgrade @material-ui/core from 4.12.3 to 4.12.4 ([fdf0210](https://github.com/olavoparno/react-use-hotjar/commit/fdf0210dfcd5d833a3d65f5e922dc46d90d6209c))
+
 ### [1.2.1](https://github.com/olavoparno/react-use-hotjar/compare/v1.2.0...v1.2.1) (2022-02-17)
 
 
