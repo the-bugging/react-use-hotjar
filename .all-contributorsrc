@@ -79,8 +79,19 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "LuighiV",
+      "name": "Luighi Viton-Zorrilla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6945270?v=4",
+      "profile": "https://luighiviton.com",
+      "contributions": [
+        "bug",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
