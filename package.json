@@ -39,7 +39,8 @@
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "release": "standard-version",
-    "make-badges": "istanbul-badges-readme"
+    "make-badges": "istanbul-badges-readme",
+    "prepublishOnly": "npm run build"
   },
   "jest": {
     "coverageReporters": [
