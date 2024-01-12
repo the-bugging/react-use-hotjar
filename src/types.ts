@@ -12,7 +12,7 @@ export interface IUseHotjar {
     logCallback?: (...data: unknown[]) => void
   ) => boolean;
   identifyHotjar: (
-    userId: string,
+    userId: string | null,
     userInfo: TUserInfo,
     logCallback?: (...data: unknown[]) => void
   ) => boolean;

@@ -68,6 +68,20 @@ describe('Tests useHotjar', () => {
     });
   });
 
+  it('should identifyHotjar for De-identified users', () => {
+    const { result } = renderHook(() => useHotjar());
+    const identifyHotjarSpy = jest.spyOn(result.current, 'identifyHotjar');
+    const { identifyHotjar } = result.current;
+
+    identifyHotjar(null, {
+      ab_test: 'variant-A',
+    });
+
+    expect(identifyHotjarSpy).toHaveBeenCalledWith(null, {
+      ab_test: 'variant-A',
+    });
+  });
+
   it('should stateChange with new relative path', () => {
     const { result } = renderHook(() => useHotjar());
     const stateChangeSpy = jest.spyOn(result.current, 'stateChange');
