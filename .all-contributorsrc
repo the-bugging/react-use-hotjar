@@ -89,9 +89,19 @@
         "bug",
         "maintenance"
       ]
+    },
+    {
+      "login": "QuentinLuc",
+      "name": "Quentin Luc",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5237095?v=4",
+      "profile": "https://www.linkedin.com/in/quentin-luc-15161994/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
