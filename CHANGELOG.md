@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.5](https://github.com/the-bugging/react-use-hotjar/compare/v1.2.4...v1.2.5) (2024-01-16)
+
+
+### Bug Fixes
+
+* type for identifyHotjar userId arg ([f1da271](https://github.com/the-bugging/react-use-hotjar/commit/f1da271cca50b8e2c78b54cf46bcab88894e478f))
+
 ### [1.2.4](https://github.com/the-bugging/react-use-hotjar/compare/v1.2.3...v1.2.4) (2023-02-27)
 
 ### [1.2.3](https://github.com/the-bugging/react-use-hotjar/compare/v1.2.1...v1.2.3) (2023-02-26)

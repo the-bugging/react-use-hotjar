@@ -1,6 +1,6 @@
 {
   "name": "react-use-hotjar",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Adds Hotjar capabilities as custom hooks",
   "author": "Olavo Parno",
   "license": "MIT",
